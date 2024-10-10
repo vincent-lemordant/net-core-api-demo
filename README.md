@@ -24,12 +24,18 @@ Run :
 dotnet run --project src/WebApplication1/WebApplication1.csproj
 ```
 
-You can find the swagger spec at : http://localhost:5164/swagger/index.html
+You can find the swagger spec at : http://localhost:5164/swagger/index.html (Development only)
 
 ## Test
 
-Test :
+Run xUnit tests  :
 
 ```shell
 dotnet test -l "console;verbosity=normal"
 ```
+
+## Deploy
+
+The app is automatically deployed on Azure using GitHub Actions, after every push on Main branch.
+
+Deployed app is hosted as Azure Web App.
