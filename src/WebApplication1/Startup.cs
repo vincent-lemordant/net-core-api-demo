@@ -22,12 +22,22 @@ public class Startup(IConfiguration configuration)
 
     public void Configure(WebApplication app)
     {
-        // Configure the HTTP request pipeline.
+        app.UseSwagger();
+
         if (app.Environment.IsDevelopment())
         {
-            app.UseSwagger();
             app.UseSwaggerUI();
         }
+        else if (app.Environment.IsProduction())
+        {
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+                c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root (i.e., https://<your-api>.azurewebsites.net/)
+            });
+        }
+
+        app.UseHttpsRedirection();
 
         app.MapControllers();
     }
